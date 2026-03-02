@@ -12,8 +12,11 @@ const { flashMessages } = require("./middleware/flash");
 const app = express();
 const PORT = parseInt(process.env.PORT, 10) || 3000;
 
-// Security headers
-app.use(helmet({ contentSecurityPolicy: false }));
+// Security headers — allow iframe embedding for FORGE sandbox demos
+app.use(helmet({
+  contentSecurityPolicy: false,
+  frameguard: false, // Allow embedding in iframes (needed for FORGE sandbox viewer)
+}));
 
 // Body parsing
 app.use(express.urlencoded({ extended: true }));
