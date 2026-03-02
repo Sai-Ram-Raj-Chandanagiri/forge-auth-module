@@ -1,0 +1,66 @@
+<%- include('partials/header') %>
+
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Welcome, <strong><%= profile.full_name %></strong></p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">&#128100;</div>
+      <div class="stat-content">
+        <h3>Your Account</h3>
+        <p class="stat-value"><%= profile.email %></p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">&#128197;</div>
+      <div class="stat-content">
+        <h3>Member Since</h3>
+        <p class="stat-value"><%= new Date(profile.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">&#128336;</div>
+      <div class="stat-content">
+        <h3>Last Login</h3>
+        <p class="stat-value">
+          <% if (profile.last_login_at) { %>
+            <%= new Date(profile.last_login_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) %>
+          <% } else { %>
+            First visit
+          <% } %>
+        </p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">&#128101;</div>
+      <div class="stat-content">
+        <h3>Total Users</h3>
+        <p class="stat-value"><%= totalUsers %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <h2>About This Module</h2>
+    <p>
+      This is a production-grade authentication module built for the <strong>FORGE Marketplace</strong>.
+      It provides email/password authentication with bcrypt hashing, PostgreSQL-backed sessions,
+      input validation, and CSRF protection.
+    </p>
+    <ul>
+      <li>Bcrypt password hashing (12 rounds)</li>
+      <li>Server-side sessions stored in PostgreSQL</li>
+      <li>Input validation with express-validator</li>
+      <li>Security headers via Helmet</li>
+      <li>Responsive UI with EJS templates</li>
+    </ul>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | Forge Auth</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo">
+        <span class="logo-icon">&#9878;</span> Forge Auth
+      </a>
+      <div class="nav-links">
+        <% if (user) { %>
+          <span class="nav-user">Signed in as <strong><%= user.fullName %></strong></span>
+          <form action="/logout" method="POST" class="inline-form">
+            <button type="submit" class="btn btn-outline btn-sm">Sign Out</button>
+          </form>
+        <% } else { %>
+          <a href="/login" class="btn btn-outline btn-sm">Sign In</a>
+          <a href="/register" class="btn btn-primary btn-sm">Create Account</a>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container main-content">
+    <% if (flash) { %>
+      <div class="alert alert-<%= flash.type %>">
+        <%= flash.message %>
+      </div>
+    <% } %>
